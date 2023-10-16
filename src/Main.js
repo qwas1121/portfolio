@@ -1,6 +1,100 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./main.css";
 import IMAGES from "./images/images";
+import projectData from "./projectData";
+import projectData2 from "./projectData2";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const ImageModal = ({ images, video, onClose }) => {
+  const [nav1, setNav1] = useState(null);
+  const [nav2, setNav2] = useState(null);
+  const videoRef = useRef(null);
+  const hasVideo = video && video.length > 0;
+
+  const mainMedia = hasVideo ? images.slice(0, -2).concat(video) : images;
+  const thumbnailMedia = hasVideo ? images.slice(0, -1) : images;
+
+  const playVideo = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+    }
+  };
+
+  const pauseVideo = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
+  };
+
+  const mainSliderSettings = {
+    asNavFor: nav2,
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    afterChange: (currentIndex) => {
+      if (hasVideo && currentIndex === images.length - 1) {
+        playVideo();
+      } else {
+        pauseVideo();
+      }
+    },
+  };
+  const thumbnailSliderSettings = {
+    asNavFor: nav1,
+    focusOnSelect: true,
+    slidesToShow: 4,
+    arrows: false,
+  };
+
+  return (
+    <div id="imageModal">
+      <div className="modalContent">
+        <div className="mainSlide">
+          <Slider ref={(slider) => setNav1(slider)} {...mainSliderSettings}>
+            {mainMedia.map((media, index) => {
+              const fileExtension = media.split(".").pop();
+              if (fileExtension === "mp4") {
+                return (
+                  <div key={index}>
+                    <video id="video" controls muted autoPlay>
+                      <source src={media} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                );
+              } else {
+                return (
+                  <div key={index}>
+                    <img src={media} alt="project" />
+                  </div>
+                );
+              }
+            })}
+          </Slider>
+        </div>
+        <div className="thumbnailSlide">
+          <Slider
+            ref={(slider) => setNav2(slider)}
+            {...thumbnailSliderSettings}
+          >
+            {thumbnailMedia.map((image, index) => (
+              <div key={index}>
+                <img src={image} alt="project" />
+              </div>
+            ))}
+          </Slider>
+        </div>
+      </div>
+      <button onClick={onClose} className="closeBtn">
+        X
+      </button>
+    </div>
+  );
+};
 
 const Main = () => {
   // 상세정보
@@ -8,13 +102,17 @@ const Main = () => {
   const handleClick = (tabName) => {
     setActiveTab(tabName);
   };
+
+  // 이미지 클릭 시 모달
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [currentImage, setCurrentImage] = useState([]);
+  const [currentVideo, setCurrentVideo] = useState([]);
+
   return (
     <>
       <div id="banner">
-        <div className="text">
-          <h1>I am A Dreamer</h1>
-          <p>SonSehee's Portfolio</p>
-        </div>
+        <p className="text mainTitle01 font2">I am A</p>
+        <p className="text mainTitle02 font2">Dreamer</p>
       </div>
       <div id="info">
         <div className="infoMenu">
@@ -61,11 +159,17 @@ const Main = () => {
             </p>
             <p>
               <span>Email</span>
-              <a href="mailto:sh_s91@naver.com">sh_s91@naver.com</a>
+              <a href="mailto:sh_s91@naver.com" rel="noopener noreferrer">
+                sh_s91@naver.com
+              </a>
             </p>
             <p>
               <span>Blog</span>
-              <a href="https://sehee21.tistory.com/" target="_balnk">
+              <a
+                href="https://sehee21.tistory.com/"
+                target="_balnk"
+                rel="noopener noreferrer"
+              >
                 https://sehee21.tistory.com/
               </a>
             </p>
@@ -140,42 +244,68 @@ const Main = () => {
       <div id="projects01" className="projects">
         <h2>PROJECTS</h2>
         <h3>- React&Node -</h3>
-        <div className="pjContent">
-          <p className="pjTitle">Alterlink NFT </p>
-          <div className="inner">
-            <div className="img"></div>
-            <div className="cont">
-              <div className="description">
-                <p>NFT 민팅 & 채팅 프로젝트 (진행중)</p>
+        {projectData.map((project, index) => (
+          <div className="pjContent" key={index}>
+            <p className="pjTitle">{project.title}</p>
+            <div className="inner">
+              <div
+                className="img"
+                onClick={() => {
+                  setCurrentImage(project.modalImages);
+                  setCurrentVideo(project.modalVideo);
+                  setModalOpen(true);
+                }}
+              >
+                <img src={project.image} alt="" />
               </div>
-              <div className="featureList">
-                <div className="feature">
-                  <p className="type">Frontend</p>
-                  <p className="text">
-                    <span>다양한 시각적 효과를 넣었습니다.</span>
-                    <span>메타마스크 지갑 연동 버튼을 추가했습니다.</span>
-                    <span>
-                      현재 NFT를 소유하고 있지 않다면 채팅페이지 접근할 수
-                      없도록 했습니다.
-                    </span>
-                  </p>
-                  <p className="type">Backend</p>
-                  <p className="text">
-                    <span>
-                      만약 DB에 사용자의 지갑주소가 없다면 로그인 페이지로
-                      이동되도록 했고, 로그인을 하면 입력한 정보가 DB에
-                      저장되도록 했습니다.
-                    </span>
-                    <span>
-                      socket.io와 openai api를 사용하여 선택한 언어에 맞게 채팅
-                      내용이 번역되어 보여지도록 했습니다.
-                    </span>
-                  </p>
+              <div className="cont">
+                <div className="description">
+                  <p>{project.description}</p>
                 </div>
+                <div className="featureList">
+                  {project.features.map((feature, fIndex) => (
+                    <div className="feature" key={fIndex}>
+                      <p className="type">{feature.type}</p>
+                      <p className="text mgbt">
+                        {feature.text.map((text, tIndex) => (
+                          <span key={tIndex}>{text}</span>
+                        ))}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                <div className="urls">
+                  {project.urls.map((url, uIndex) => (
+                    <p key={uIndex}>
+                      <span>{url.label}</span>
+                      <a
+                        href={url.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {url.link}
+                      </a>
+                    </p>
+                  ))}
+                </div>
+                <div className="skills"></div>
               </div>
             </div>
           </div>
-        </div>
+        ))}
+      </div>
+
+      {isModalOpen && (
+        <ImageModal
+          images={currentImage}
+          video={currentVideo}
+          onClose={() => setModalOpen(false)}
+        />
+      )}
+
+      <div id="projects02" className="projects">
+        <h2>PROJECTS</h2>
+        <h3>- Publishing -</h3>
       </div>
     </>
   );

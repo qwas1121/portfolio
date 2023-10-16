@@ -5,10 +5,16 @@
 }
 #banner .text {
   text-align: center;
+  font-weight: 900;
+  font-size: 201px;
+  line-height: 0.96;
+  letter-spacing: -8.04px;
+  color: #fff;
+  text-transform: uppercase;
 }
 #info {
   border-top: 1px solid;
-  padding: 185px 0;
+  padding: 155px 0;
   background: #f2f2f2;
 }
 #info .infoMenu {
@@ -106,7 +112,7 @@
 }
 
 .projects {
-  padding: 100px 0;
+  padding: 110px 0;
 }
 .projects h2 {
   font-family: "Archivo", sans-serif;
@@ -121,20 +127,34 @@
 .projects h3 {
   font-family: "Archivo", sans-serif;
   font-size: 50px;
-  color: #deb5b5;
   text-align: center;
   font-weight: normal;
   font-style: italic;
   line-height: 100%;
+  margin-bottom: 85px;
 }
-
+#projects01 {
+  background: #d6d6d6;
+}
+#projects01 h2,
+#projects01 h3 {
+  color: #ff7474;
+}
+#projects01 .pjContent {
+  padding: 45px 45px 65px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+}
 #projects01 .pjContent .pjTitle {
-  font-size: 25px;
+  font-size: 43px;
   color: #808080;
   margin-bottom: 45px;
   text-align: center;
   font-style: italic;
   font-weight: 600;
+  letter-spacing: -1.72px;
+  font-weight: normal;
 }
 #projects01 .pjContent {
   max-width: 1300px;
@@ -146,8 +166,126 @@
 }
 #projects01 .pjContent .inner .img {
   width: 578px;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+#projects01 .pjContent .inner .img img {
+  width: 100%;
+}
+
+#projects01 .pjContent .inner .img::before {
+  content: "More +";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  display: grid;
+  text-align: center;
+  align-items: center;
+  font-size: 30px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+#projects01 .pjContent .inner .img:hover::before {
+  opacity: 1;
 }
 #projects01 .pjContent .inner .cont {
   width: calc(100% - 578px);
   padding-left: 60px;
+  font-size: 18px;
+  color: #888;
+}
+#projects01 .pjContent .inner .cont > div {
+  border-bottom: 1px solid #f0f0f0;
+  padding: 25px 0;
+}
+#projects01 .pjContent .inner .cont > div p {
+  word-break: keep-all;
+}
+#projects01 .pjContent .inner .cont .feature .type {
+  font-weight: bold;
+}
+#projects01 .pjContent .inner .cont .featureList p span {
+  display: block;
+}
+#projects01 .pjContent .inner .cont .mgbt {
+  margin-bottom: 30px;
+}
+#projects01 .pjContent .inner .cont .urls p {
+  margin: 5px 0;
+}
+#projects01 .pjContent .inner .cont .urls span {
+  width: 80px;
+  display: inline-block;
+  font-weight: bold;
+}
+#projects01 .pjContent .inner .cont .urls a {
+  color: #888;
+  font-weight: 300;
+}
+#projects01 .pjContent .inner .cont .urls a:hover {
+  color: #444;
+}
+#projects01 .pjContent .inner .cont .skills {
+  border: none;
+}
+
+#imageModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 99;
+}
+#imageModal .modalContent {
+  width: 1135px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#imageModal .modalContent img {
+  width: 100%;
+}
+
+#video {
+  width: 100%;
+  height: 100%;
+}
+#imageModal .mainSlide .slick-track {
+  display: flex;
+  align-items: center;
+}
+#imageModal .thumbnailSlide .slick-slide {
+  padding: 0 17px;
+}
+
+#imageModal .thumbnailSlide {
+  margin-top: 35px;
+}
+#imageModal .closeBtn {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  font-size: 30px;
+  color: #fff;
+  background: transparent;
+  border: none;
+}
+
+#projects02 {
+  background: #f2f2f2;
+}
+#projects02 h2,
+#projects02 h3 {
+  color: #deb5b5;
 }
