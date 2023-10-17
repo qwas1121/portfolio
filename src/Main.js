@@ -140,20 +140,17 @@ const Main = () => {
     const bannerBottomPosition =
       bannerRef.current.getBoundingClientRect().bottom;
 
-    // banner를 넘어갔을 때
     if (bannerBottomPosition < 0) {
       window.removeEventListener("mousemove", handleMouseMove);
     } else {
-      // banner 내부에 있을 때
       window.addEventListener("mousemove", handleMouseMove);
     }
   };
   useEffect(() => {
-    window.addEventListener("mousemove", handleMouseMove);
+    // window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("scroll", checkScrollPosition);
-
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
+      // window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("scroll", checkScrollPosition);
     };
   }, []);
