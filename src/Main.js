@@ -116,22 +116,27 @@ const ImageModal = ({ images, video, onClose }) => {
 };
 
 const Main = () => {
-  // 달 이미지
+  // 메인배너
   const moonRef = useRef(null);
+  const titleRef = useRef(null);
   const bannerRef = useRef(null);
 
   const handleMouseMove = (event) => {
     const { clientX, clientY } = event;
     const { innerWidth, innerHeight } = window;
 
-    const moveX = (clientX / innerWidth - 0.5) * 30;
-    const moveY = (clientY / innerHeight - 0.5) * 30;
+    const moveX = (clientX / innerWidth - 0.5) * 10;
+    const moveY = (clientY / innerHeight - 0.5) * 10;
     const offsetX = (clientX / innerWidth - 0.5) * 2;
     const offsetY = (clientY / innerHeight - 0.5) * 2;
     const rotateY = offsetX * 30;
     const rotateX = -offsetY * 10;
 
     moonRef.current.style.transform = `translate(${moveX}%, ${moveY}%) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+    const titleMoveX = -(clientX / innerWidth - 0.5) * 30;
+    const titleMoveY = -(clientY / innerHeight - 0.5) * 30;
+    titleRef.current.style.transform = `translate(${titleMoveX}%, ${titleMoveY}%)`;
   };
 
   const checkScrollPosition = () => {
@@ -167,6 +172,7 @@ const Main = () => {
   const [currentVideo, setCurrentVideo] = useState([]);
 
   // 퍼블리셔 그리드 버튼 gridBtns
+
   const [currentView, setCurrentView] = useState("three-column-view");
   const handleButtonClick = (view) => {
     setCurrentView(view);
@@ -180,8 +186,10 @@ const Main = () => {
           <img src={IMAGES.moonShadow} alt="" className="moonShadow" />
         </div>
 
-        <p className="title01 maintitle font2">I am A</p>
-        <p className="title02 maintitle font2">Dreamer</p>
+        <div ref={titleRef}>
+          <p className="title01 maintitle font2">I am A</p>
+          <p className="title02 maintitle font2">Dreamer</p>
+        </div>
       </div>
       <div id="info">
         <div className="infoMenu">
@@ -439,6 +447,18 @@ const Main = () => {
         <div className="sec_inner ">
           <div className="btnWrap cf">
             <div className="gridBtns">
+              <div
+                className="buttonBg"
+                style={{
+                  transform: `translateY(-50%) translateX(${
+                    currentView === "list-view"
+                      ? "0%"
+                      : currentView === "three-column-view"
+                      ? "100%"
+                      : "200%"
+                  })`,
+                }}
+              ></div>
               <button
                 onClick={() => handleButtonClick("list-view")}
                 className={currentView === "list-view" ? "on" : ""}

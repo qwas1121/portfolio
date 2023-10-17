@@ -406,6 +406,7 @@
   background: #e5e5e5;
   padding: 3px;
   border-radius: 10px;
+  position: relative;
 }
 #projects02 .gridBtns button {
   border: none;
@@ -413,10 +414,23 @@
   padding: 10px 15px;
   border-radius: 10px;
   transition: background-color 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
-#projects02 .gridBtns button.on {
-  background-color: #ff7171;
+
+#projects02 .gridBtns .buttonBg {
+  content: "";
+  width: 45px;
+  height: 91%;
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  background: #ff7171;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
 }
+
 #projects02 .gridBtns button svg .stroke {
   stroke: #797979;
   transition: stroke 0.3s ease;
@@ -692,6 +706,10 @@
   #info .infoContents .contWrap.contSkills .skill {
     margin-bottom: 5vw;
   }
+  #info .infoMenu button.btnHistory > img {
+    transform: scaleX(1);
+  }
+
   .projects h2 {
     font-size: 12vw;
   }
