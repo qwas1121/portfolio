@@ -1,14 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
-/* @font-face {
-  font-family: "Corsiva Hebrew Bold";
-  font-style: normal;
-  font-weight: normal;
+@font-face {
+  font-family: "Corsiva Hebrew";
   src: url("./fonts/corsiva-hebrew-bold.ttf");
 }
+
 .font2 {
-  font-family: "Corsiva Hebrew Bold";
-} */
+  font-family: "Corsiva Hebrew";
+}
+
 html {
   overflow-y: scroll;
 }
@@ -102,4 +102,25 @@ a {
   content: "";
   display: table;
   clear: both;
+}
+
+#footer {
+  background: #191919;
+  padding: 55px 0;
+}
+#footer p {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 15px;
+  font-weight: 300;
+}
+#footer .links {
+  display: flex;
+  justify-content: center;
+  column-gap: 20px;
+  margin-top: 20px;
+}
+#footer .links a {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 25px;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./main.css";
 import IMAGES from "./images/images";
 import projectData from "./projectData";
@@ -6,6 +6,9 @@ import projectData2 from "./projectData2";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { ReactComponent as ViewIconList } from "./images/viewIcon_list.svg";
+import { ReactComponent as ViewIconThree } from "./images/viewIcon_three.svg";
+import { ReactComponent as ViewIconTwo } from "./images/viewIcon_two.svg";
 
 const ImageModal = ({ images, video, onClose }) => {
   const [nav1, setNav1] = useState(null);
@@ -42,12 +45,28 @@ const ImageModal = ({ images, video, onClose }) => {
         pauseVideo();
       }
     },
+    responsive: [
+      {
+        breakpoint: 500,
+        settings: {
+          arrows: false,
+        },
+      },
+    ],
   };
   const thumbnailSliderSettings = {
     asNavFor: nav1,
     focusOnSelect: true,
     slidesToShow: 4,
     arrows: false,
+    responsive: [
+      {
+        breakpoint: 500,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+    ],
   };
 
   return (
@@ -97,6 +116,48 @@ const ImageModal = ({ images, video, onClose }) => {
 };
 
 const Main = () => {
+  // 달 이미지
+  const moonRef = useRef(null);
+  const bannerRef = useRef(null);
+
+  const handleMouseMove = (event) => {
+    const { clientX, clientY } = event;
+    const { innerWidth, innerHeight } = window;
+
+    const moveX = (clientX / innerWidth - 0.5) * 30;
+    const moveY = (clientY / innerHeight - 0.5) * 30;
+    const offsetX = (clientX / innerWidth - 0.5) * 2;
+    const offsetY = (clientY / innerHeight - 0.5) * 2;
+    const rotateY = offsetX * 30;
+    const rotateX = -offsetY * 10;
+
+    moonRef.current.style.transform = `translate(${moveX}%, ${moveY}%) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  };
+
+  const checkScrollPosition = () => {
+    if (!bannerRef.current) return;
+
+    const bannerBottomPosition =
+      bannerRef.current.getBoundingClientRect().bottom;
+
+    // banner를 넘어갔을 때
+    if (bannerBottomPosition < 0) {
+      window.removeEventListener("mousemove", handleMouseMove);
+    } else {
+      // banner 내부에 있을 때
+      window.addEventListener("mousemove", handleMouseMove);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("scroll", checkScrollPosition);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", checkScrollPosition);
+    };
+  }, []);
+
   // 상세정보
   const [activeTab, setActiveTab] = useState("Detail");
   const handleClick = (tabName) => {
@@ -108,36 +169,58 @@ const Main = () => {
   const [currentImage, setCurrentImage] = useState([]);
   const [currentVideo, setCurrentVideo] = useState([]);
 
+  // 퍼블리셔 그리드 버튼 gridBtns
+  const [currentView, setCurrentView] = useState("three-column-view");
+  const handleButtonClick = (view) => {
+    setCurrentView(view);
+  };
+
   return (
     <>
-      <div id="banner">
-        <p className="text mainTitle01 font2">I am A</p>
-        <p className="text mainTitle02 font2">Dreamer</p>
+      <div id="banner" ref={bannerRef}>
+        <div className="imgWrap">
+          <img src={IMAGES.moonImg} alt="" className="moon" ref={moonRef} />
+          <img src={IMAGES.moonShadow} alt="" className="moonShadow" />
+        </div>
+
+        <p className="title01 maintitle font2">I am A</p>
+        <p className="title02 maintitle font2">Dreamer</p>
       </div>
       <div id="info">
         <div className="infoMenu">
-          <img src={IMAGES.character} alt="" />
+          <img src={IMAGES.character} alt="" className="characterImg" />
+          <div className="characterBubble">
+            <img src={IMAGES.characterBubble} alt="" />
+          </div>
           <p>
             “안녕하세요. 풀스택 개발자를 꿈꾸는 <span>손세희</span>입니다.”
           </p>
-          <button
-            className={`btnDetail ${activeTab === "Detail" ? "on" : ""}`}
-            onClick={() => handleClick("Detail")}
-          >
-            상세정보
-          </button>
-          <button
-            className={`btnSkill ${activeTab === "Skills" ? "on" : ""}`}
-            onClick={() => handleClick("Skills")}
-          >
-            SKILLS
-          </button>
-          <button
-            className={`btnHistory ${activeTab === "History" ? "on" : ""}`}
-            onClick={() => handleClick("History")}
-          >
-            이력
-          </button>
+          <div className="mBtnWrap">
+            <button
+              className={`btnDetail ${activeTab === "Detail" ? "on" : ""}`}
+              onClick={() => handleClick("Detail")}
+            >
+              <span>상세정보</span>
+              <img src={IMAGES.detailBubble} alt="" className="basicBubble" />
+              <img src={IMAGES.detailBubbleOn} alt="" className="colorBubble" />
+            </button>
+            <button
+              className={`btnSkill ${activeTab === "Skills" ? "on" : ""}`}
+              onClick={() => handleClick("Skills")}
+            >
+              <span>SKILLS</span>
+              <img src={IMAGES.detailBubble} alt="" className="basicBubble" />
+              <img src={IMAGES.detailBubbleOn} alt="" className="colorBubble" />
+            </button>
+            <button
+              className={`btnHistory ${activeTab === "History" ? "on" : ""}`}
+              onClick={() => handleClick("History")}
+            >
+              <span>이력</span>
+              <img src={IMAGES.detailBubble} alt="" className="basicBubble" />
+              <img src={IMAGES.detailBubbleOn} alt="" className="colorBubble" />
+            </button>
+          </div>
         </div>
         <div className="infoContents">
           <div
@@ -164,6 +247,16 @@ const Main = () => {
               </a>
             </p>
             <p>
+              <span>Github</span>
+              <a
+                href="https://github.com/qwas1121"
+                target="_balnk"
+                rel="noopener noreferrer"
+              >
+                https://github.com/qwas1121
+              </a>
+            </p>
+            <p>
               <span>Blog</span>
               <a
                 href="https://sehee21.tistory.com/"
@@ -183,14 +276,44 @@ const Main = () => {
             <div className="skill skillFront">
               <p>Frontend</p>
               <div className="skillList">
-                <img
-                  className="html"
-                  src={IMAGES.frontSkill_html}
-                  alt="html, css, javascript"
-                />
+                <img src={IMAGES.frontSkill_html} alt="html" />
+                <img src={IMAGES.frontSkill_css} alt="css" />
+                <img src={IMAGES.frontSkill_js} alt="javascript" />
                 <img src={IMAGES.frontSkill_jquery} alt="jquery" />
                 <img src={IMAGES.frontSkill_react} alt="react" />
                 <img src={IMAGES.frontSkill_typsecript} alt="typescript" />
+              </div>
+            </div>
+            <div className="skill skillBack">
+              <p>Backend</p>
+              <div className="skillList">
+                <img src={IMAGES.backSkill_php} alt="php" />
+                <img src={IMAGES.backSkill_node} alt="node" />
+                <img src={IMAGES.backSkill_sql} alt="mysql" />
+                <img src={IMAGES.backSkill_mongo} alt="mongo db" />
+                <img
+                  src={IMAGES.backSkill_python}
+                  alt="python"
+                  className="python"
+                />
+              </div>
+            </div>
+            <div className="skill skillDeployment">
+              <p>Deployment</p>
+              <div className="skillList">
+                <img src={IMAGES.deploySkill_aws} alt="amazon web services" />
+                <img
+                  src={IMAGES.deploySkill_cloudflare}
+                  alt="cloudflare"
+                  className="cloudflare"
+                />
+              </div>
+            </div>
+            <div className="skill skillVersionControl">
+              <p>Version Control</p>
+              <div className="skillList">
+                <img src={IMAGES.vcSkill_git} alt="git" className="git" />
+                <img src={IMAGES.vcSkill_github} alt="github" />
               </div>
             </div>
           </div>
@@ -245,7 +368,7 @@ const Main = () => {
         <h2>PROJECTS</h2>
         <h3>- React&Node -</h3>
         {projectData.map((project, index) => (
-          <div className="pjContent" key={index}>
+          <div className="pjContent sec_inner" key={index}>
             <p className="pjTitle">{project.title}</p>
             <div className="inner">
               <div
@@ -257,6 +380,16 @@ const Main = () => {
                 }}
               >
                 <img src={project.image} alt="" />
+                <button
+                  className="mBtn"
+                  onClick={() => {
+                    setCurrentImage(project.modalImages);
+                    setCurrentVideo(project.modalVideo);
+                    setModalOpen(true);
+                  }}
+                >
+                  More +
+                </button>
               </div>
               <div className="cont">
                 <div className="description">
@@ -306,6 +439,50 @@ const Main = () => {
       <div id="projects02" className="projects">
         <h2>PROJECTS</h2>
         <h3>- Publishing -</h3>
+        <div className="sec_inner ">
+          <div className="btnWrap cf">
+            <div className="gridBtns">
+              <button
+                onClick={() => handleButtonClick("list-view")}
+                className={currentView === "list-view" ? "on" : ""}
+              >
+                <ViewIconList />
+              </button>
+              <button
+                onClick={() => handleButtonClick("three-column-view")}
+                className={currentView === "three-column-view" ? "on" : ""}
+              >
+                <ViewIconThree />
+              </button>
+
+              <button
+                onClick={() => handleButtonClick("two-column-view")}
+                className={currentView === "two-column-view" ? "on" : ""}
+              >
+                <ViewIconTwo />
+              </button>
+            </div>
+          </div>
+          <div className={`pj2Wrap ${currentView}`}>
+            {projectData2.map((project2, index) => (
+              <div className="pj2Content" key={index}>
+                <a
+                  href={project2.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div className="imgBox">
+                    <img src={project2.image} alt="" />
+                  </div>
+                  <p className="pjName font2">
+                    {project2.title}
+                    <span className="pjSkill">{project2.skill}</span>
+                  </p>
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </>
   );

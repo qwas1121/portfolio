@@ -1,40 +1,118 @@
+.sec_inner {
+  max-width: 1300px;
+  margin: 0 auto;
+}
 #banner {
   width: 100%;
   height: 100vh;
   background: #f2f2f2;
-}
-#banner .text {
+  position: relative;
+  display: flex;
+  align-items: center;
   text-align: center;
-  font-weight: 900;
-  font-size: 201px;
-  line-height: 0.96;
+  flex-flow: column;
+  justify-content: center;
+}
+
+#banner .imgWrap {
+  position: absolute;
+  top: 50%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 1;
+  perspective: 1000px;
+}
+
+#banner .imgWrap .moon {
+  width: 538px;
+  opacity: 0.65;
+}
+
+#banner .imgWrap .moonShadow {
+  width: 415px;
+  margin-top: 48px;
+}
+
+#banner .maintitle {
+  font-weight: bold;
   letter-spacing: -8.04px;
+  font-size: 200px;
   color: #fff;
   text-transform: uppercase;
+  font-style: italic;
+  line-height: 0.96;
+  position: relative;
 }
+#banner .maintitle.title01 {
+  z-index: 1;
+}
+
 #info {
-  border-top: 1px solid;
-  padding: 155px 0;
+  padding: 200px 0;
   background: #f2f2f2;
 }
+#info .characterBubble {
+  width: 78px;
+  position: absolute;
+  top: -110px;
+  left: 56%;
+  transform: translateX(-50%);
+}
+#info .characterBubble img {
+  width: 100%;
+  animation: rotateBubble 3s linear infinite;
+}
+
+@keyframes rotateBubble {
+  0% {
+    transform: perspective(300px) rotateY(0deg);
+  }
+  100% {
+    transform: perspective(300px) rotateY(360deg);
+  }
+}
+
 #info .infoMenu {
   width: 650px;
   margin: 0 auto;
-  padding: 25px 0 27px;
+  /* padding: 25px 0 27px; */
+  padding-bottom: 27px;
   position: relative;
   text-align: center;
 }
 #info .infoMenu button {
   position: absolute;
-  font-size: 20px;
-  width: 125px;
-  height: 40px;
-  line-height: 40px;
-  background: #fff;
+  width: 155px;
+  background: transparent;
   border: none;
-  border-radius: 30px;
+}
+#info .infoMenu button > img {
+  width: 100%;
+}
+#info .infoMenu button > span {
+  position: absolute;
+  top: 40%;
+  left: 48%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
   color: #444;
-  font-weight: 300;
+  font-weight: bold;
+  width: 100%;
+  letter-spacing: -0.4px;
+  z-index: 1;
+}
+#info .infoMenu button.on > span {
+  color: #fc6262;
+}
+#info .infoMenu button .colorBubble {
+  display: none;
+}
+#info .infoMenu button.on .basicBubble {
+  display: none;
+}
+#info .infoMenu button.on .colorBubble {
+  display: block;
 }
 #info .infoMenu p {
   margin-top: 25px;
@@ -43,19 +121,22 @@
   font-weight: 300;
 }
 #info .infoMenu p span {
-  font-weight: 500;
+  font-weight: 600;
 }
 #info .infoMenu button.btnSkill {
-  top: 105px;
-  left: 70px;
+  top: 150px;
+  left: 0px;
 }
 #info .infoMenu button.btnDetail {
-  top: 0;
-  left: 70px;
+  top: 10px;
+  left: 60px;
 }
 #info .infoMenu button.btnHistory {
-  top: 85px;
-  right: 50px;
+  top: 115px;
+  right: 00px;
+}
+#info .infoMenu button.btnHistory > img {
+  transform: scaleX(-1);
 }
 #info .infoContents {
   width: 650px;
@@ -75,7 +156,7 @@
 #info .infoContents .contWrap p {
   font-size: 16px;
   color: #888;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 #info .infoContents .contWrap a {
   color: #888;
@@ -90,14 +171,37 @@
   font-weight: 600;
   text-transform: uppercase;
 }
+#info .infoContents .contWrap.contSkills {
+  padding: 18px;
+}
+#info .infoContents .contWrap.contSkills .skill {
+  margin-bottom: 40px;
+}
+#info .infoContents .contWrap.contSkills .skill > p {
+  font-size: 16px;
+  letter-spacing: -0.32px;
+  color: #888;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #bfbfbf;
+  font-weight: 500;
+}
 
 #info .infoContents .contWrap .skillList {
   display: flex;
   flex-flow: wrap;
+  column-gap: 4.04%;
+  margin-top: 40px;
+  align-items: center;
 }
-
-#info .infoContents .contWrap .skillList .html {
-  width: 250px;
+#info .infoContents .contWrap .skillList > img {
+  width: 13.3%;
+}
+#info .infoContents .contWrap .skillList > img.python {
+  width: 29.5%;
+}
+#info .infoContents .contWrap .skillList > img.cloudflare,
+#info .infoContents .contWrap .skillList > img.git {
+  width: 30%;
 }
 
 #info .infoContents .contWrap.contHistory p span {
@@ -157,7 +261,6 @@
   font-weight: normal;
 }
 #projects01 .pjContent {
-  max-width: 1300px;
   margin: 50px auto 0;
 }
 
@@ -288,4 +391,397 @@
 #projects02 h2,
 #projects02 h3 {
   color: #deb5b5;
+}
+#projects02.projects h3 {
+  margin-bottom: 0;
+  margin-bottom: 48px;
+}
+#projects02.projects .btnWrap {
+  padding: 20px 0;
+  border-top: 1px solid #b9b9b9;
+}
+#projects02 .gridBtns {
+  float: right;
+  display: flex;
+  background: #e5e5e5;
+  padding: 3px;
+  border-radius: 10px;
+}
+#projects02 .gridBtns button {
+  border: none;
+  background-color: transparent;
+  padding: 10px 15px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+#projects02 .gridBtns button.on {
+  background-color: #ff7171;
+}
+#projects02 .gridBtns button svg .stroke {
+  stroke: #797979;
+  transition: stroke 0.3s ease;
+}
+#projects02 .gridBtns button svg .fill {
+  fill: #797979;
+  transition: fill 0.3s ease;
+}
+#projects02 .gridBtns button.on svg .stroke {
+  stroke: #fff;
+}
+#projects02 .gridBtns button.on svg .fill {
+  fill: #fff;
+}
+#projects02 .pj2Wrap > div {
+  transition: width 0.3s ease-in-out;
+}
+
+#projects02 .pj2Wrap .pjName {
+  font-size: 24px;
+  color: #808080;
+  font-style: italic;
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #b9b9b9;
+  letter-spacing: -0.96px;
+}
+#projects02 .imgBox {
+  transition: width 0.3s ease-in-out;
+  transition: height 0.3s ease-in-out;
+}
+#projects02 .imgBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+#projects02 .imgBox::before {
+  content: "More +";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  display: grid;
+  text-align: center;
+  align-items: center;
+  font-size: 30px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+#projects02 .pj2Wrap a:hover .imgBox::before {
+  opacity: 1;
+}
+
+#projects02 .pj2Wrap {
+  display: flex;
+  flex-flow: wrap;
+  column-gap: 2%;
+  row-gap: 50px;
+}
+#projects02 .pj2Wrap .pjSkill {
+  display: none;
+}
+#projects02 .pj2Wrap.three-column-view > div {
+  width: 32%;
+}
+#projects02 .pj2Wrap.three-column-view .imgBox {
+  position: relative;
+  width: 100%;
+  height: 265px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+#projects02 .pj2Wrap.two-column-view {
+  display: flex;
+  flex-flow: wrap;
+  column-gap: 3%;
+  row-gap: 50px;
+}
+
+#projects02 .pj2Wrap.two-column-view > div {
+  width: 47%;
+}
+#projects02 .pj2Wrap.two-column-view .imgBox {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+#projects02 .pj2Wrap.list-view {
+  column-gap: normal;
+  row-gap: 20px;
+}
+#projects02 .pj2Wrap.list-view .pj2Content {
+  /* width: 49%; */
+  width: 100%;
+  border-bottom: 1px solid #b9b9b9;
+  padding-bottom: 20px;
+}
+
+#projects02 .pj2Wrap.list-view .pj2Content a {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+#projects02 .pj2Wrap.list-view .pj2Content a::before {
+  content: "More +";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #444;
+}
+#projects02 .pj2Wrap.list-view .pj2Content a:hover::before {
+  font-weight: 600;
+}
+
+#projects02 .pj2Wrap.list-view p {
+  text-align: left;
+}
+#projects02 .pj2Wrap.list-view .pjSkill {
+  display: block;
+  font-size: 18px;
+  color: rgba(128, 128, 128, 0.6);
+}
+#projects02 .pj2Wrap.list-view .imgBox {
+  width: 70px;
+  height: 70px;
+  margin-right: 30px;
+}
+#projects02 .pj2Wrap.list-view .pjName {
+  border-bottom: none;
+  padding: 0;
+}
+#projects02 .pj2Wrap.list-view .imgBox::before {
+  display: none;
+}
+
+.projects .mBtn {
+  display: none;
+}
+@media (max-height: 1000px) {
+  #imageModal .modalContent {
+    width: 1100px;
+  }
+}
+
+@media (max-height: 900px) {
+  #imageModal .thumbnailSlide {
+    display: none;
+  }
+}
+@media (max-width: 1300px) {
+  #imageModal .modalContent {
+    width: 800px;
+  }
+}
+@media (max-width: 1024px) {
+  .sec_inner {
+    width: 90%;
+  }
+  #info .infoMenu,
+  #info .infoContents {
+    width: 70%;
+  }
+  .projects h2 {
+    font-size: 70px;
+  }
+  .projects h3 {
+    font-size: 40px;
+  }
+  #projects01 .pjContent .inner .img::before {
+    display: none;
+  }
+  #projects01 .pjContent .inner .img {
+    width: 45%;
+  }
+  #projects01 .pjContent .inner .cont {
+    width: calc(100% - 45%);
+    padding-left: 5%;
+  }
+  .projects .mBtn {
+    display: block;
+    font-size: 20px;
+    margin: 40px auto 0;
+    background: #e5e5e5;
+    color: #797979;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  #projects02 .imgBox::before {
+    display: none;
+  }
+  #projects02 .pj2Wrap .pjName::after {
+    content: "More +";
+    display: block;
+    font-size: 20px;
+    margin: 10px auto 0;
+    color: #797979;
+    background: #e5e5e5;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+  #projects02 .pj2Wrap.list-view .pjName::after {
+    display: none;
+  }
+}
+@media (max-width: 800px) {
+  #banner .maintitle {
+    font-size: 140px;
+  }
+}
+
+@media (max-width: 500px) {
+  #banner .imgWrap .moon {
+    width: 80vw;
+  }
+  #banner .imgWrap .moonShadow {
+    width: 60vw;
+    margin-top: 20vw;
+  }
+  #banner .maintitle {
+    font-size: 20vw;
+  }
+  #info {
+    padding: 40vw 0 10vw;
+  }
+  #info .characterBubble {
+    width: 17vw;
+    top: -24vw;
+  }
+  #info .infoMenu .characterImg {
+    width: 60vw;
+  }
+  #info .mBtnWrap {
+    display: flex;
+    margin-top: 7vw;
+    column-gap: 2%;
+  }
+  #info .infoMenu button {
+    position: relative;
+    top: auto !important;
+    left: auto !important;
+    width: 32%;
+  }
+  #info .infoMenu button > span {
+    font-size: 4vw;
+  }
+  #info .infoMenu,
+  #info .infoContents {
+    width: 90%;
+  }
+  #info .infoMenu p {
+    font-size: 5vw;
+    word-break: keep-all;
+  }
+  #info .infoContents .contWrap p,
+  #info .infoContents .contWrap.contSkills .skill > p {
+    font-size: 14px;
+  }
+  #info .infoContents .contWrap .skillList {
+    margin-top: 5vw;
+  }
+  #info .infoContents .contWrap.contSkills .skill {
+    margin-bottom: 5vw;
+  }
+  .projects h2 {
+    font-size: 12vw;
+  }
+  .projects h3 {
+    font-size: 7vw;
+    margin-bottom: 12vw;
+  }
+  #projects01 .pjContent {
+    margin: 0 auto;
+    padding: 6vw 6vw 8vw;
+    margin: 13vw auto 0;
+  }
+  #projects01 .pjContent .pjTitle {
+    font-size: 7vw;
+    margin-bottom: 7vw;
+  }
+  #projects01 .pjContent .inner {
+    flex-flow: wrap;
+  }
+  #projects01 .pjContent .inner .img {
+    width: 100%;
+  }
+  .projects .mBtn {
+    font-size: 16px;
+    margin: 2.5vw auto 0;
+  }
+  #projects01 .pjContent .inner .cont {
+    width: 100%;
+    padding: 0;
+    margin-top: 2vw;
+    font-size: 15px;
+  }
+  #projects01 .pjContent .inner .cont .mgbt {
+    margin-bottom: 2vw;
+  }
+  #projects01 .pjContent .inner .cont > div {
+    padding: 2vw 0;
+  }
+  #imageModal .modalContent {
+    width: 90%;
+  }
+  #imageModal .thumbnailSlide {
+    display: block;
+    margin-top: 7vw;
+  }
+  #imageModal .thumbnailSlide .slick-slide {
+    padding: 0 2vw;
+  }
+  #imageModal .closeBtn {
+    top: 5vw;
+    right: 5%;
+    font-size: 20px;
+  }
+  .projects {
+    padding: 20vw 0;
+  }
+  #projects02 .pj2Wrap {
+    row-gap: 6vw;
+  }
+  #projects02 .pj2Wrap.three-column-view {
+    column-gap: 3%;
+  }
+  #projects02 .pj2Wrap.three-column-view > div {
+    width: 47%;
+  }
+  #projects02 .pj2Wrap.three-column-view .imgBox {
+    height: 30vw;
+    margin-bottom: 2vw;
+  }
+  #projects02 .pj2Wrap .pjName {
+    font-size: 4vw;
+    word-break: keep-all;
+    border: none;
+  }
+  #projects02 .pj2Wrap .pjName::after {
+    font-size: 3vw;
+    margin: 2.5vw auto 0;
+  }
+  #projects02 .pj2Wrap.three-column-view a {
+    position: relative;
+  }
+  #projects02 .pj2Wrap.two-column-view {
+    row-gap: 6vw;
+    column-gap: 0;
+  }
+  #projects02 .pj2Wrap.two-column-view > div {
+    width: 100%;
+  }
+  #projects02 .pj2Wrap.two-column-view .imgBox {
+    height: 40vw;
+    margin-bottom: 2vw;
+  }
 }
