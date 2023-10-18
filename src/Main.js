@@ -185,11 +185,12 @@ const Main = () => {
           <img src={IMAGES.moonImg} alt="" className="moon" ref={moonRef} />
           <img src={IMAGES.moonShadow} alt="" className="moonShadow" />
         </div>
-
-        <div ref={titleRef}>
-          <p className="title01 maintitle font2">I am A</p>
-          <p className="title02 maintitle font2">Dreamer</p>
-        </div>
+        <p ref={titleRef} className="title01 maintitle font2">
+          I am A
+        </p>
+        <p ref={titleRef} className="title02 maintitle font2">
+          Dreamer
+        </p>
       </div>
       <div id="info">
         <div className="infoMenu">

@@ -421,7 +421,7 @@
 #projects02 .gridBtns .buttonBg {
   content: "";
   width: 45px;
-  height: 91%;
+  height: 90%;
   position: absolute;
   top: 50%;
   left: 5px;
@@ -433,11 +433,11 @@
 
 #projects02 .gridBtns button svg .stroke {
   stroke: #797979;
-  transition: stroke 0.3s ease;
+  transition: stroke 0.4s ease;
 }
 #projects02 .gridBtns button svg .fill {
   fill: #797979;
-  transition: fill 0.3s ease;
+  transition: fill 0.4s ease;
 }
 #projects02 .gridBtns button.on svg .stroke {
   stroke: #fff;
@@ -446,7 +446,7 @@
   fill: #fff;
 }
 #projects02 .pj2Wrap > div {
-  transition: width 0.3s ease-in-out;
+  transition: width 0.3 ease-in-out;
 }
 
 #projects02 .pj2Wrap .pjName {
