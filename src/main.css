@@ -337,6 +337,10 @@
 #projects01 .pjContent .inner .cont .skills {
   border: none;
 }
+#projects01 .pjContent .inner .cont .skills img {
+  width: 50px;
+  margin-right: 20px;
+}
 
 #imageModal {
   position: fixed;

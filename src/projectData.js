@@ -21,6 +21,15 @@ const projectData = [
       },
     ],
     urls: [{ label: "URL", link: "https://alterlink.xyz/" }],
+    skiils: [
+      require("./images/skill_f01_html.png"),
+      require("./images/skill_f02_css.png"),
+      require("./images/skill_f06_ts.png"),
+      require("./images/skill_b02_node.png"),
+      require("./images/skill_b03_sql.png"),
+      require("./images/skill_d01_aws.png"),
+      require("./images/skill_d02_cloudflare.png"),
+    ],
     modalImages: [
       require("./images/pj_alterlink01.jpg"),
       require("./images/pj_alterlink02.jpg"),
@@ -55,6 +64,13 @@ const projectData = [
       },
     ],
     urls: [{ label: "Github", link: "https://github.com/qwas1121/sinbipub" }],
+    skiils: [
+      require("./images/skill_f01_html.png"),
+      require("./images/skill_f02_css.png"),
+      require("./images/skill_f05_react.png"),
+      require("./images/skill_b02_node.png"),
+      require("./images/skill_b03_sql.png"),
+    ],
     modalImages: [
       require("./images/pj_pub01.jpg"),
       require("./images/pj_pub02.jpg"),
@@ -91,6 +107,14 @@ const projectData = [
     urls: [
       { label: "URL", link: "https://eatcook.today/" },
       { label: "Github", link: "https://github.com/qwas1121/eatcook_back" },
+    ],
+    skiils: [
+      require("./images/skill_f01_html.png"),
+      require("./images/skill_f02_css.png"),
+      require("./images/skill_f05_react.png"),
+      require("./images/skill_b02_node.png"),
+      require("./images/skill_b04_mongo.png"),
+      require("./images/skill_d01_aws.png"),
     ],
     modalImages: [
       require("./images/pj_eatcook01.jpg"),

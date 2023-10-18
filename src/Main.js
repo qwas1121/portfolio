@@ -430,7 +430,11 @@ const Main = () => {
                     </p>
                   ))}
                 </div>
-                <div className="skills"></div>
+                <div className="skills">
+                  {project.skiils.map((sImg, sIndex) => (
+                    <img key={sIndex} src={sImg} alt="" />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
