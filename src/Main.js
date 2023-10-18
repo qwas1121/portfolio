@@ -118,7 +118,8 @@ const ImageModal = ({ images, video, onClose }) => {
 const Main = () => {
   // 메인배너
   const moonRef = useRef(null);
-  const titleRef = useRef(null);
+  const titleRef1 = useRef(null);
+  const titleRef2 = useRef(null);
   const bannerRef = useRef(null);
 
   const handleMouseMove = (event) => {
@@ -136,7 +137,8 @@ const Main = () => {
 
     const titleMoveX = -(clientX / innerWidth - 0.5) * 30;
     const titleMoveY = -(clientY / innerHeight - 0.5) * 30;
-    titleRef.current.style.transform = `translate(${titleMoveX}%, ${titleMoveY}%)`;
+    titleRef1.current.style.transform = `translate(${titleMoveX}%, ${titleMoveY}%)`;
+    titleRef2.current.style.transform = `translate(${titleMoveX}%, ${titleMoveY}%)`;
   };
 
   const checkScrollPosition = () => {
@@ -152,12 +154,12 @@ const Main = () => {
     }
   };
   useEffect(() => {
-    // window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("scroll", checkScrollPosition);
-    return () => {
-      // window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("scroll", checkScrollPosition);
-    };
+    // return () => {
+    //   // window.removeEventListener("mousemove", handleMouseMove);
+    //   window.removeEventListener("scroll", checkScrollPosition);
+    // };
   }, []);
 
   // 상세정보
@@ -185,10 +187,11 @@ const Main = () => {
           <img src={IMAGES.moonImg} alt="" className="moon" ref={moonRef} />
           <img src={IMAGES.moonShadow} alt="" className="moonShadow" />
         </div>
-        <p ref={titleRef} className="title01 maintitle font2">
+
+        <p ref={titleRef1} className="title01 maintitle font2">
           I am A
         </p>
-        <p ref={titleRef} className="title02 maintitle font2">
+        <p ref={titleRef2} className="title02 maintitle font2">
           Dreamer
         </p>
       </div>
